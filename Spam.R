@@ -47,4 +47,21 @@ train_tokens_dfm<-dfm(train_tokens,tolower=FALSE,remove=stopwords())
 train_tokens_matrix<-as.matrix(train_tokens_dfm)
 dim(train_tokens_matrix)
 colnames(train_tokens_matrix)[1:50]
- names(train_tokens_dfm)<-make.names(train_tokens_dfm)
+names(train_tokens_dfm)<-make.names(train_tokens_dfm)
+train_tokens_dfm<-apply(train_tokens_matrix,1,term.frequency)
+term.frequency<-funtion(row){row/sum(row)}
+term.frequency<-function(row){row/sum(row)}
+term.frequency<-funtion(row){row/sum(row)}
+term.frequency<-function(row){row/sum(row)}
+train_tokens_dfm<-apply(train_tokens_matrix,1,term.frequency)
+dim(train_tokens_dfm)
+train_tokens.tfidf<-t(train_tokens.tfidf)
+train_tokens.tfidf<-t(train_tokens_dfm)
+dim(train_tokens.tfidf)
+incomplete_cases<-which(!complete.cases(train_tokens.tfidf))
+train$sms[incomplete_cases]
+train_tokens.tfidf[incomplete_cases,]<-rep(0.0,ncol(train_tokens.tfidf))
+sum(which(!complete.cases(train_tokens.tfidf)))
+help(complete.cases())
+?complete.cases()
+
