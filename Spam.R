@@ -64,4 +64,28 @@ train_tokens.tfidf[incomplete_cases,]<-rep(0.0,ncol(train_tokens.tfidf))
 sum(which(!complete.cases(train_tokens.tfidf)))
 help(complete.cases())
 ?complete.cases()
+gc()
+train
+View(train)
+train_tokens.tfidf
+library(irlba)
+train_irlba<-irlba(t(train_tokens.tfidf),nv=200,maxit = 500)
+sigma_inverse<-1/train_irlba$d
+u_transpose<-t(train_irlba$u)
+document<-train_tokens.tfidf[1,]
+document.hat<-sigma_inverse *u_transpose %>% document
+library(dplyr)
+install.packages("dplyr")
+library(dplyr)
+document.hat<-sigma_inverse *u_transpose %>% document
+document<-train_tokens.tfidf[1,]
+document.hat<-sigma_inverse *u_transpose %>% document
+document.hat<-sigma_inverse *u_transpose %*% document
+document.hat
+document.hat[1:10]
+rpart<-train(label~.,data=train_tokens.tfidf)
+library(caret)
+rpart<-train(label~.,data=train_tokens.tfidf)
+rpart<-train(label~.,data=train)
+
 
