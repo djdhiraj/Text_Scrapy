@@ -30,3 +30,21 @@ train<-data[index,]
 test<-data[-index,]
 View(train)
 View(test)
+install.packages("quanteda")
+library(quanteda)
+View(train)
+train_tokens<-tokens(train_tokens,removes_numbers=TRUE)
+train_tokens<-tokens(train$sms,removes_numbers=TRUE)
+train_tokens<-tokens(train$sms,removes_numbers=TRUE,remove_hyphens)
+train_tokens<-tokens(train$sms,removes_numbers=TRUE,remove_hyphens=TRUE)
+train_tokens<-tokens(train$sms,removes_numbers=TRUE,remove_hyphens=TRUE,remove_stopwords=TRUE)
+train_tokens<-tokens(train$sms,removes_numbers=TRUE,remove_hyphens=TRUE,remove_stopwords=TRUE,remove_punch=TRUE)
+train_tokens<-tokens_tolower(train_tokens)
+train_tokens[[357]]
+train_tokens<-tokens_select(train_tokens,stopwords(),selection = "remove")
+train_tokens<-tokens_wordstem(train_tokens,language = "english")
+train_tokens_dfm<-dfm(train_tokens,tolower=FALSE,remove=stopwords())
+train_tokens_matrix<-as.matrix(train_tokens_dfm)
+dim(train_tokens_matrix)
+colnames(train_tokens_matrix)[1:50]
+ names(train_tokens_dfm)<-make.names(train_tokens_dfm)
